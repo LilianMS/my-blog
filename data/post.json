@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "slug": "my-first-post",
+        "title": "Fui selecionada para o Desenvolve 2025!",
+        "content": "Este é o conteúdo do meu primeiro post. Estou muito feliz por ter sido selecionada para o programa Desenvolve 2025!",
+        "date": "2025-06-01",
+        "image": "/images/dev2025.png"
+    },
+    {
+        "id": 2,
+        "slug": "javascript-basics",
+        "title": "Noções Básicas de JavaScript",
+        "content": "JavaScript é uma linguagem de programação essencial para a web.",
+        "date": "2025-07-05",
+        "image": "/images/javascript.png"
+    },
+    {
+        "id": 3,
+        "slug": "tailwindcss-tutorial",
+        "title": "Tutorial de Tailwind CSS",
+        "content": "Tailwind CSS é um framework utilitário para CSS.",
+        "date": "2025-08-10",
+        "image": "/images/tailwindcss.png"
+    },
+    {
+        "id": 4,
+        "slug": "learning-nextjs",
+        "title": "Aprendendo Next.js",
+        "content": "Next.js é um framework React para produção.",
+        "date": "2025-09-15",
+        "image": "/images/nextjs.png"
+    },
+    {
+        "id": 5,
+        "slug": "exemplo-markdown",
+        "title": "Exemplo de Markdown",
+        "content": "# Título do post em Markdown\n\nEste é um parágrafo com **negrito** e *itálico*.\n\n- Item 1\n- Item 2\n\n[Google](https://google.com)",
+        "date": "2025-09-12",
+        "image": "/images/dev2025.png"
+    }
+]
