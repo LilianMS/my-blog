@@ -16,10 +16,11 @@ export default async function Post({ params }: PostProps) {
 
 	const post = await getPost(slug);
 
-	if (!post) {
+	if (!post || post.error) {
 		return (
 			<div className="container mx-auto p-8">
-				<h1 className="">Postagem não encontrada</h1>
+				<h1 className="text-2xl font-bold">Postagem não encontrada</h1>
+				<p className="text-gray-600 mt-4">O post que você está procurando não existe.</p>
 			</div>
 		);
 	}
