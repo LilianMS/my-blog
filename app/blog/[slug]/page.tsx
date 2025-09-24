@@ -1,7 +1,9 @@
-import posts from "@/data/post.json";
 import Image from "next/image";
-import { marked } from "marked";
 
+async function getPost(slug: string) {
+	const res = await fetch(`http://localhost:3000/api/posts/${slug}`)
+	return res.json();
+}
 
 interface PostProps {
 	params: {
@@ -12,7 +14,7 @@ interface PostProps {
 export default async function Post({ params }: PostProps) {
 	const { slug } = await params;
 
-	const post = posts.find((p) => p.slug === slug);
+	const post = await getPost(slug);
 
 	if (!post) {
 		return (
@@ -22,10 +24,10 @@ export default async function Post({ params }: PostProps) {
 		);
 	}
 
-	const postContent = marked(post.content);
+	const postContent = post.content;
 
 	return (
-		<main className="container mx-auto p-8">
+		<main className="container mx-auto p-8 bg-pink-200">
 			<h1 className="text-4xl font-bold mb-4">{post.title}</h1>
 			<p className="text-sm text-gray-500 mb-6">Publicado em: {post.date}</p>
 			{post.image && (
@@ -41,7 +43,7 @@ export default async function Post({ params }: PostProps) {
 			)}
 			<article
 				className="prose"
-				dangerouslySetInnerHTML={{ __html: marked(post.content) }}
+				dangerouslySetInnerHTML={{ __html: post.content }}
 			></article>
 		</main>
 	);

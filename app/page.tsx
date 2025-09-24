@@ -1,15 +1,18 @@
 import Link from "next/link";
-import posts from "@/data/post.json";
 
-import Image from "next/image";
+async function getPosts() {
+  const response = await fetch('http://localhost:3000/api/posts')
+  return response.json()
+}
 
-export default function Home() {
+export default async function Home() {
+	const posts = await getPosts()
 return (
 	<main className="flex min-h-screen flex-col items-center p-24">
 
 		<h1 className="text-4xl font-bold mb-8">My Blog</h1>
 		<ul className="space-y-4">
-			{posts.map((post) => (
+			{posts.map((post: any) => (
 				<li key={post.id} className="border-b pb-4">
 					<Link href={`/blog/${post.slug}`} className="hover:text-blue-500">
 						<h2 className="text-2xl font-semibold">{post.title}</h2>
