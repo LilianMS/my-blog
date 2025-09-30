@@ -1,5 +1,6 @@
-import {NextResponse} from 'next/server';
-import {writeFileSync, readFileSync} from 'fs';
+import { NextResponse } from 'next/server';
+import { writeFileSync, readFileSync } from 'fs';
+import { PostType } from '@/types/types';
 import posts from '@/data/post.json';
 import path from 'path';
 
@@ -16,11 +17,11 @@ export async function GET() {
 // }
 
 export async function POST(request: Request) {
-    const newPost = await request.json()
+    const newPost: PostType = await request.json()
 
     const filePath = path.join(process.cwd(), 'data', 'post.json')
     const fileData = readFileSync(filePath, 'utf-8')
-    const posts = JSON.parse(fileData)
+    const posts: PostType[] = JSON.parse(fileData)
 
     posts.push(newPost)
 

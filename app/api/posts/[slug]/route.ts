@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { writeFileSync, readFileSync } from 'fs'
 import posts from '@/data/post.json'
 import path from 'path'
+import { PostType } from '@/types/types'
 
 // api/posts/[slug]/route.ts
 export async function GET(
@@ -25,7 +26,7 @@ export async function DELETE(
     const fileData = readFileSync(filePath, 'utf-8')
     const posts = JSON.parse(fileData)
 
-    const updatedPosts = posts.filter((p: any) => p.slug !== slug)
+    const updatedPosts = posts.filter((p: PostType) => p.slug !== slug)
 
     writeFileSync(filePath, JSON.stringify(updatedPosts, null, 2))
 
@@ -43,7 +44,7 @@ export async function PUT(
     const fileData = readFileSync(filePath, 'utf-8')
     const posts = JSON.parse(fileData)
 
-    const postIndex = posts.findIndex((p: any) => p.slug === slug)
+    const postIndex = posts.findIndex((p: PostType) => p.slug === slug)
     if (postIndex === -1) {
         return NextResponse.json({ error: 'Post não encontrado' }, { status: 404 })
     }

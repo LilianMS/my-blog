@@ -1,7 +1,16 @@
+import { PostType } from "@/types/types";
 import Image from "next/image";
 
 async function getPost(slug: string) {
-	const res = await fetch(`http://localhost:3000/api/posts/${slug}`)
+	// Durante build/pré-renderização, usa import direto
+	if (typeof window === 'undefined' && !process.env.VERCEL_URL) {
+		const posts = await import('@/data/post.json')
+		const post = posts.default.find((p: PostType) => p.slug === slug)
+		return post || { error: 'Post não encontrado' }
+	}
+
+	// Em runtime (dev/produção), usa API
+	const res = await fetch(`/api/posts/${slug}`)
 	return res.json();
 }
 
@@ -25,7 +34,7 @@ export default async function Post({ params }: PostProps) {
 		);
 	}
 
-	const postContent = post.content;
+	// const postContent = post.content;
 
 	return (
 		<main className="container mx-auto p-8 bg-pink-200">

@@ -31,7 +31,7 @@ export default function AdminLogin() {
         setError('Senha incorreta')
       }
     } catch (error) {
-      setError('Erro ao fazer login')
+      setError('Erro ao fazer login: ' + error)
     } finally {
       setLoading(false)
     }
