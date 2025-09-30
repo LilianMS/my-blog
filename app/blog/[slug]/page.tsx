@@ -2,14 +2,14 @@ import { PostType } from "@/types/types";
 import Image from "next/image";
 
 async function getPost(slug: string) {
-	 // Só durante build local usa import
-    if (!process.env.VERCEL_URL) {
+	// Durante build (local ou Vercel), usa import direto
+    if (typeof window === 'undefined') {
         const posts = await import('@/data/post.json')
         const post = posts.default.find((p: PostType) => p.slug === slug)
         return post || { error: 'Post não encontrado' }
     }
 
-    // No Vercel sempre usa API
+    // No cliente usa API
 	const res = await fetch(`/api/posts/${slug}`)
 	return res.json();
 }
