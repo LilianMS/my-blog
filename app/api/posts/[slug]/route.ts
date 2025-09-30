@@ -6,7 +6,7 @@ import path from 'path'
 // api/posts/[slug]/route.ts
 export async function GET(
     request: Request,
-    { params }: { params: { slug: string } }
+    { params }: { params: Promise<{ slug: string }> }
 ) {
     const { slug } = await params
     const post = posts.find(p => p.slug === slug)
@@ -18,7 +18,7 @@ export async function GET(
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { slug: string } }
+    { params }: { params: Promise<{ slug: string }> }
 ) {
     const { slug } = await params
     const filePath = path.join(process.cwd(), 'data', 'post.json')
@@ -34,7 +34,7 @@ export async function DELETE(
 
 export async function PUT(
     request: Request,
-    { params }: { params: { slug: string } }
+    { params }: { params: Promise<{ slug: string }> }
 ) {
     const { slug } = await params
     const updatedPost = await request.json()
