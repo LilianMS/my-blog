@@ -2,13 +2,13 @@ import { PostType } from "@/types/types";
 import Link from "next/link";
 
 async function getPosts() {
-	// Durante build/pré-renderização, usa import direto
-	if (typeof window === 'undefined' && !process.env.VERCEL_URL) {
-		const posts = await import('@/data/post.json')
-		return posts.default
-	}
+	 // Só durante build local usa import
+  if (!process.env.VERCEL_URL) {
+    const posts = await import('@/data/post.json')
+    return posts.default
+  }
 
-	// Em runtime (dev/produção), usa API
+  // No Vercel sempre usa API
 	const response = await fetch('/api/posts')
 	return response.json()
 }
